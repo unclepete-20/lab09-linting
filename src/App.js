@@ -8,7 +8,7 @@ import criaturaCinco from './assets/creaturefive.jpg';
 import criaturaSeis from './assets/creaturefive.jpg';
 import criaturaSiete from './assets/creaturesix.jpg';
 import criaturaOcho from './assets/creatureseven.jpg';
-import backCover from './assets/backCover.jpg';
+import backCover from './assets/backCover.png';
 
 function App() {
 
