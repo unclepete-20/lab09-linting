@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css'
-import CardComponent from './components/CardComponent';
+import CardComponent from './CardComponent';
 import criaturaUno from './assets/creatureone.jpg';
 import criaturaDos from './assets/creaturetwo.jpg';
 import criaturaTres from './assets/creaturethree.jpg';
@@ -27,6 +27,7 @@ function App() {
     const [turnos, setTurnos] = React.useState(0)
     const [cartaSeleccionadaUno, setCartaSeleccionadaUno] = React.useState(null)
     const [cartaSeleccionadaDos, setCartaSeleccionadaDos] = React.useState(null)
+    const [deshabilitar, setDeshabilitar] = React.useState(false)
 
     const shuffleCards = () => {
         const shuffledCards = [...cartasCriaturas, ...cartasCriaturas]
@@ -35,7 +36,6 @@ function App() {
 
         setCartas(shuffledCards)
         setTurnos(0)
-        console.log("Hola")
     }
 
     const manejarSeleccionCarta = (card) => {
@@ -43,6 +43,7 @@ function App() {
     }
 
     React.useEffect(() => {
+        setDeshabilitar(true)
         if(cartaSeleccionadaUno && cartaSeleccionadaDos){
             if(cartaSeleccionadaUno.src === cartaSeleccionadaDos.src){
                 setCartas(prevCartas => {
@@ -58,7 +59,7 @@ function App() {
                 reinicarTurno()
             }else{
                 console.log('NO MATCH')
-                reinicarTurno()
+                setTimeout(() => reinicarTurno(), 1500)
             }
         }
     }, [cartaSeleccionadaUno, cartaSeleccionadaDos])
@@ -67,7 +68,7 @@ function App() {
         setCartaSeleccionadaUno(null)
         setCartaSeleccionadaDos(null)
         setTurnos(prevTurnos => prevTurnos + 1)
-
+        setDeshabilitar(false)
     }
 
     return (
@@ -76,7 +77,12 @@ function App() {
             <button onClick={shuffleCards}>Nuevo juego</button>
             <div className="grid-cartas">
                 {cartas.map(card => (
-                    <CardComponent key={card.id} card={card} manejarSeleccionCarta={manejarSeleccionCarta} />
+                    <CardComponent 
+                    key={card.id} 
+                    card={card} 
+                    manejarSeleccionCarta={manejarSeleccionCarta} 
+                    volteado={card === cartaSeleccionadaUno || card === cartaSeleccionadaDos || card.matched}
+                    deshabilitar={deshabilitar} />
                 ))}
             </div>
         </div>
