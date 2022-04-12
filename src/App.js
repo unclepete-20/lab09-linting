@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css'
+import CardComponent from './components/CardComponent';
 import criaturaUno from './assets/creatureone.jpg';
 import criaturaDos from './assets/creaturetwo.jpg';
 import criaturaTres from './assets/creaturethree.jpg';
@@ -8,11 +9,9 @@ import criaturaCinco from './assets/creaturefive.jpg';
 import criaturaSeis from './assets/creaturefive.jpg';
 import criaturaSiete from './assets/creaturesix.jpg';
 import criaturaOcho from './assets/creatureseven.jpg';
-import backCover from './assets/backCover.png';
 
 function App() {
 
-    
      const cartasCriaturas = [
          { "src": criaturaUno },
          { "src": criaturaDos },
@@ -26,8 +25,10 @@ function App() {
 
     const [cartas, setCartas] = React.useState([])
     const [turnos, setTurnos] = React.useState(0)
+    const [cartaSeleccionadaUno, setCartaSeleccionadaUno] = React.useState(null)
+    const [cartaSeleccionadaDos, setCartaSeleccionadaDos] = React.useState(null)
 
-    function shuffleCards () {
+    const shuffleCards = () => {
         const shuffledCards = [...cartasCriaturas, ...cartasCriaturas]
             .sort(() => Math.random() - 0.5)
             .map((card) => ({ ...card, id: Math.random() }))
@@ -37,7 +38,9 @@ function App() {
         console.log("Hola")
     }
 
-    console.log(cartas, turnos)
+    const manejarSeleccionCarta = (card) => {
+        cartaSeleccionadaUno ? setCartaSeleccionadaDos(card) : setCartaSeleccionadaUno(card)
+    }
 
     return (
         <div className="App">
@@ -45,12 +48,7 @@ function App() {
             <button onClick={shuffleCards}>Nuevo juego</button>
             <div className="grid-cartas">
                 {cartas.map(card => (
-                    <div className="carta" key={card.id}>
-                        <div>
-                            <img className="frente" src={card.src} alt="Frente carta" />
-                            <img className="parteTrasera" src={backCover} alt="Cover" />
-                        </div>
-                    </div>
+                    <CardComponent key={card.id} card={card} manejarSeleccionCarta={manejarSeleccionCarta} />
                 ))}
             </div>
         </div>
