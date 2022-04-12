@@ -10,7 +10,7 @@ export default function CardGame({ card, manejarSeleccionCarta }) {
         <div className="carta">
             <div>
                 <img className="frente" src={card.src} alt="Frente carta" />
-                <img className="parteTrasera" src="/assets/back.jpg" onClick={manejarAccion} alt="Cover" />
+                <img className="parteTrasera" src="./assets/back.jpg" onClick={manejarAccion} alt="Cover" />
             </div>
         </div>
     )

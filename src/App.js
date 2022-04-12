@@ -13,14 +13,14 @@ import criaturaOcho from './assets/creatureseven.jpg';
 function App() {
 
      const cartasCriaturas = [
-         { "src": criaturaUno },
-         { "src": criaturaDos },
-         { "src": criaturaTres },
-         { "src": criaturaCuatro },
-         { "src": criaturaCinco },
-         { "src": criaturaSeis },
-         { "src": criaturaSiete },
-         { "src": criaturaOcho }
+         { "src": criaturaUno, matched: false },
+         { "src": criaturaDos, matched: false },
+         { "src": criaturaTres, matched: false},
+         { "src": criaturaCuatro, matched: false},
+         { "src": criaturaCinco, matched: false},
+         { "src": criaturaSeis, matched: false},
+         { "src": criaturaSiete, matched: false},
+         { "src": criaturaOcho, matched: false}
      ];
 
     const [cartas, setCartas] = React.useState([])
@@ -40,6 +40,34 @@ function App() {
 
     const manejarSeleccionCarta = (card) => {
         cartaSeleccionadaUno ? setCartaSeleccionadaDos(card) : setCartaSeleccionadaUno(card)
+    }
+
+    React.useEffect(() => {
+        if(cartaSeleccionadaUno && cartaSeleccionadaDos){
+            if(cartaSeleccionadaUno.src === cartaSeleccionadaDos.src){
+                setCartas(prevCartas => {
+                    return prevCartas.map(card => {
+                        if(card.src === cartaSeleccionadaUno.src){
+                            return { ...card, matched: true }
+                        }else{
+                            return card
+                        }
+                        
+                    })
+                })
+                reinicarTurno()
+            }else{
+                console.log('NO MATCH')
+                reinicarTurno()
+            }
+        }
+    }, [cartaSeleccionadaUno, cartaSeleccionadaDos])
+
+    const reinicarTurno = () => {
+        setCartaSeleccionadaUno(null)
+        setCartaSeleccionadaDos(null)
+        setTurnos(prevTurnos => prevTurnos + 1)
+
     }
 
     return (
