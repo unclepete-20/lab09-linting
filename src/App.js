@@ -6,9 +6,9 @@ import criaturaDos from './assets/creaturetwo.jpg';
 import criaturaTres from './assets/creaturethree.jpg';
 import criaturaCuatro from './assets/creaturefour.jpg';
 import criaturaCinco from './assets/creaturefive.jpg';
-import criaturaSeis from './assets/creaturefive.jpg';
-import criaturaSiete from './assets/creaturesix.jpg';
-import criaturaOcho from './assets/creatureseven.jpg';
+import criaturaSeis from './assets/creaturesix.jpg';
+import criaturaSiete from './assets/creatureseven.jpg';
+import criaturaOcho from './assets/creatureeight.jpg';
 
 function App() {
 
@@ -29,11 +29,17 @@ function App() {
     const [cartaSeleccionadaDos, setCartaSeleccionadaDos] = React.useState(null)
     const [deshabilitar, setDeshabilitar] = React.useState(false)
 
+    React.useEffect(() => {
+        shuffleCards()
+    }, [])
+
     const shuffleCards = () => {
         const shuffledCards = [...cartasCriaturas, ...cartasCriaturas]
             .sort(() => Math.random() - 0.5)
             .map((card) => ({ ...card, id: Math.random() }))
 
+        setCartaSeleccionadaUno(null)
+        setCartaSeleccionadaDos(null)
         setCartas(shuffledCards)
         setTurnos(0)
     }
@@ -43,8 +49,8 @@ function App() {
     }
 
     React.useEffect(() => {
-        setDeshabilitar(true)
         if(cartaSeleccionadaUno && cartaSeleccionadaDos){
+            setDeshabilitar(true)
             if(cartaSeleccionadaUno.src === cartaSeleccionadaDos.src){
                 setCartas(prevCartas => {
                     return prevCartas.map(card => {
@@ -85,6 +91,9 @@ function App() {
                     deshabilitar={deshabilitar} />
                 ))}
             </div>
+            <p className="turnos">Turnos: {turnos}</p>
+            <p className="turnos">Cartas encontradas: {cartas.filter(card => card.matched).length}</p>
+            <p className="Nombre">Pedro Pablo Arriola Jimenez (20188)</p>
         </div>
     );
 }

@@ -4,7 +4,7 @@ import back from './assets/back.jpg';
 
 export default function CardGame({ card, manejarSeleccionCarta, volteado, deshabilitar }) {
     const manejarAccion = () => {
-        if(!disabled) {
+        if(!deshabilitar) {
             manejarSeleccionCarta(card);
         }
         
