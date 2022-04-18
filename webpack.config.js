@@ -5,11 +5,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   mode: "development",
   // Entre point of project 
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   // Name and path of output file
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "bundle_react"),
+    path: path.resolve(__dirname, "bundle_react_linting"),
   },
   // Loaders for different file types
   plugins: [
@@ -29,7 +29,7 @@ module.exports = {
       },
       // Loader for js files
       {
-        test: /\.m?js$/,
+        test: /\.(js|jsx)$/i,
         exclude: /(node_modules)/,
         use: {
           loader: 'babel-loader',

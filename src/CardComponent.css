@@ -1,31 +1,31 @@
 .carta {
-    position: relative;
+  position: relative;
 }
 
 .carta img {
-    width: 100%;
-    display: block;
-    border: 5px solid #966F33;
-    border-radius: 8px;
+  width: 100%;
+  display: block;
+  border: 5px solid #966f33;
+  border-radius: 8px;
 }
 
 .carta .frente {
-    transform: rotateY(90deg);
-    position: absolute;
-    transition: all ease-in 0.2s;
+  transform: rotateY(90deg);
+  position: absolute;
+  transition: all ease-in 0.2s;
 }
 
-.volteado .frente{
-    transform: rotateY(0deg);
-    transition-delay: 0.2s;
+.volteado .frente {
+  transform: rotateY(0deg);
+  transition-delay: 0.2s;
 }
 
 .carta .parteTrasera {
-    transition: all ease-in 0.2s;
-    transition-delay: 0.2s;
+  transition: all ease-in 0.2s;
+  transition-delay: 0.2s;
 }
 
 .volteado .parteTrasera {
-    transform: rotateY(90deg);
-    transition-delay: 0s;
+  transform: rotateY(90deg);
+  transition-delay: 0s;
 }
